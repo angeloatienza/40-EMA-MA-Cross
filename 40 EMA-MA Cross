@@ -1,0 +1,10 @@
+strategy("40 EMA/MA Cross")
+ema40 = ema(close, 40)
+sma40 = sma(close,40)
+long = ema40 > sma40
+short = ema40 < sma40
+strategy.entry("Long", strategy.long, 10000.0, when=long)
+strategy.entry("Short", strategy.short, 10000.0, when=short)
+strategy.close("Long", when = short)
+strategy.close("Short", when = long)
+plot(strategy.equity)
